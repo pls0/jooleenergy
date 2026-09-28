@@ -1,0 +1,17 @@
+
+# Environment variables 
+.env/
+venv/
+env/
+
+#historic files
+0.historic/
+00.Documents_Analytics_Project/
+0.workbench/
+*.log
+
+# raw datas
+Source/
+consulta.sql
+*.csv
+
