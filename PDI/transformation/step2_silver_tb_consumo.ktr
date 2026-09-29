@@ -430,7 +430,7 @@
     <created_date>2026/09/15 16:19:08.077</created_date>
     <modified_user>-</modified_user>
     <modified_date>2026/09/15 16:19:08.077</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -510,51 +510,7 @@
       <to>update_silver_tb_consumo</to>
       <enabled>Y</enabled>
     </hop>
-    <hop>
-      <from>Valores tratados e inseridos na tabela tb_consumo.</from>
-      <to>flag_processado</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>flag_processado</from>
-      <to>Update_flag</to>
-      <enabled>Y</enabled>
-    </hop>
   </order>
-  <step>
-    <name>input_bronze_stg_consumo</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>joole_energy_db</connection>
-    <sql>SELECT mes_referencia,consumo_total_acr, consumo_total_acl, arquivo_origem, data_carga_bronze, flag_processado_silver, getdate() AS data_processamento_atual
-FROM bronze.stg_consumo
-WHERE flag_processado_silver = 0</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>String operations</name>
     <type>StringOperations</type>
@@ -622,6 +578,65 @@ WHERE flag_processado_silver = 0</sql>
     </GUI>
   </step>
   <step>
+    <name>Valores tratados e inseridos na tabela tb_consumo.</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>input_bronze_stg_consumo</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>joole_energy_db</connection>
+    <sql>SELECT mes_referencia,consumo_total_acr, consumo_total_acl, arquivo_origem, data_carga_bronze, flag_processado_silver, getdate() AS data_processamento_atual
+FROM bronze.stg_consumo
+WHERE flag_processado_silver = 0</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>160</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>update_silver_tb_consumo</name>
     <type>InsertUpdate</type>
     <description/>
@@ -681,133 +696,6 @@ WHERE flag_processado_silver = 0</sql>
     <GUI>
       <xloc>496</xloc>
       <yloc>80</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Valores tratados e inseridos na tabela tb_consumo.</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>608</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>flag_processado</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>flag_processado</name>
-        <type>Boolean</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>true</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>816</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Update_flag</name>
-    <type>Update</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>joole_energy_db</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema>bronze</schema>
-      <table>stg_consumo</table>
-      <key>
-        <name>mes_referencia</name>
-        <field>mes_referencia</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>consumo_total_acr</name>
-        <field>consumo_total_acr</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>consumo_total_acl</name>
-        <field>consumo_total_acl</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>arquivo_origem</name>
-        <field>arquivo_origem</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>flag_processado_silver</name>
-        <rename>flag_processado</rename>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>928</xloc>
-      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

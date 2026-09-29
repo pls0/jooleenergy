@@ -9,6 +9,7 @@ env/
 00.Documents_Analytics_Project/
 0.workbench/
 *.log
+linhascsv-final.py
 
 # raw datas
 Source/
