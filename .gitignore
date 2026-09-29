@@ -3,6 +3,7 @@
 .env/
 venv/
 env/
+n8n-data/n8n_data/
 
 #historic files
 0.historic/
